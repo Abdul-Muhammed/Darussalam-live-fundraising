@@ -1,0 +1,1033 @@
+/* ===================================
+   CSS VARIABLES & DESIGN TOKENS
+   =================================== */
+:root {
+    /* Darussalam Color Palette */
+    --teal-50: #e6f7f7;
+    --teal-100: #b3e9e9;
+    --teal-200: #80dbdb;
+    --teal-300: #4dcdcd;
+    --teal-400: #2ec5c5;
+    --teal-500: #1ab5b5;
+    --teal-600: #16a0a0;
+    --teal-700: #128787;
+    --teal-800: #0e6e6e;
+    --teal-900: #0a5555;
+    
+    --coral-400: #ff8a65;
+    --coral-500: #ff7043;
+    --coral-600: #f4511e;
+    
+    --gold: #d4af37;
+    --gold-light: #f4e5a8;
+    
+    /* Neutrals */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    /* Semantic Colors */
+    --primary: var(--teal-500);
+    --primary-light: var(--teal-400);
+    --primary-dark: var(--teal-700);
+    --accent: var(--coral-500);
+    --background: #0a1414;
+    --surface: #0f1a1a;
+    --surface-light: #142424;
+    
+    /* Typography */
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+    
+    /* Effects */
+    --glow-teal: 0 0 40px rgba(26, 181, 181, 0.3);
+    --glow-teal-strong: 0 0 60px rgba(26, 181, 181, 0.5);
+    --glow-coral: 0 0 30px rgba(255, 112, 67, 0.4);
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.4s ease;
+    --transition-slow: 0.8s ease;
+}
+
+/* ===================================
+   RESET & BASE STYLES
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--background);
+    color: var(--gray-100);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================
+   DISPLAY PAGE STYLES
+   =================================== */
+.display-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: 
+        linear-gradient(180deg, #a8d5d6 0%, #b8dfe0 30%, #c8e9ea 60%, #b8dfe0 100%);
+}
+
+.pattern-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(ellipse 800px 600px at 15% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 500px at 85% 70%, rgba(255, 255, 255, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 700px 400px at 50% 90%, rgba(168, 213, 214, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse 500px 600px at 80% 30%, rgba(200, 233, 234, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 500px at 20% 80%, rgba(184, 223, 224, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.display-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    padding: var(--spacing-2xl);
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #00a859;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #00a859;
+    box-shadow: 0 4px 12px rgba(0, 168, 89, 0.2);
+    animation: badgePulse 3s ease-in-out infinite;
+}
+
+.live-pulse {
+    width: 8px;
+    height: 8px;
+    background: #00a859;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.crescent-icon {
+    width: 18px;
+    height: 18px;
+    color: #00a859;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 4px 12px rgba(0, 168, 89, 0.2); }
+    50% { box-shadow: 0 6px 20px rgba(0, 168, 89, 0.35); }
+}
+
+/* Main Content */
+.main-content {
+    text-align: center;
+    position: relative;
+}
+
+.main-heading {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.arabic-accent {
+    color: #ff7043;
+    font-size: 0.7em;
+    display: inline-block;
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.subheading {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: #4b5563;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-3xl);
+    font-weight: 500;
+}
+
+/* Fundraising Card */
+.fundraising-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 28px;
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+    margin: 0 auto;
+    max-width: 900px;
+    box-shadow: 
+        0 20px 60px rgba(77, 205, 205, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    backdrop-filter: blur(10px);
+}
+
+.fundraising-card.celebration {
+    animation: cardCelebrate 0.6s ease-out;
+}
+
+@keyframes cardCelebrate {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.02); }
+    75% { transform: scale(0.98); }
+}
+
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(77, 205, 205, 0.25) 20%, 
+        rgba(95, 191, 191, 0.35) 50%, 
+        rgba(77, 205, 205, 0.25) 80%, 
+        transparent 100%);
+    animation: waterFlow 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.card-glow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(168, 213, 214, 0.2) 15%, 
+        rgba(184, 223, 224, 0.3) 50%, 
+        rgba(168, 213, 214, 0.2) 85%, 
+        transparent 100%);
+    animation: waterFlow 10s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+@keyframes waterFlow {
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+.total-raised-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #4b5563;
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+}
+
+.amount-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-2xl);
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1;
+    color: #2d7474;
+    text-shadow: none;
+}
+
+.currency {
+    font-size: clamp(3rem, 8vw, 5rem);
+    margin-right: var(--spacing-sm);
+}
+
+.amount {
+    font-size: clamp(4rem, 12vw, 8rem);
+    transition: transform var(--transition-medium);
+}
+
+.amount.counting {
+    animation: countPulse 0.3s ease-out;
+}
+
+@keyframes countPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Progress Section */
+.progress-section {
+    margin-top: var(--spacing-xl);
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+    font-size: 0.95rem;
+    color: var(--gray-400);
+}
+
+.progress-label {
+    color: #4b5563;
+    font-weight: 600;
+}
+
+.progress-percentage {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2d7474;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.progress-goal {
+    color: #4b5563;
+    font-weight: 600;
+}
+
+.progress-bar-container {
+    height: 14px;
+    background: #e6f7f7;
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #2d7474 0%, #4aa9a9 100%);
+    border-radius: 100px;
+    width: 0%;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 2px 8px rgba(77, 205, 205, 0.4);
+}
+
+.progress-bar.animating {
+    animation: progressGlow 0.8s ease-out;
+}
+
+@keyframes progressGlow {
+    0%, 100% { box-shadow: 0 2px 8px rgba(77, 205, 205, 0.4); }
+    50% { box-shadow: 0 4px 16px rgba(77, 205, 205, 0.6); }
+}
+
+.progress-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shine 2s ease-in-out infinite;
+}
+
+@keyframes shine {
+    to { left: 100%; }
+}
+
+/* Islamic Decorative Patterns */
+.islamic-pattern {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    opacity: 0.12;
+    background-image: 
+        radial-gradient(circle at center, #4aa9a9 2px, transparent 2px),
+        radial-gradient(circle at center, #4aa9a9 2px, transparent 2px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    pointer-events: none;
+}
+
+.pattern-left {
+    top: 50%;
+    left: -100px;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.pattern-right {
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Footer */
+.footer-message {
+    text-align: center;
+    margin-top: var(--spacing-3xl);
+    color: #4b5563;
+    font-size: 0.9rem;
+}
+
+.islamic-divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff7043, transparent);
+    margin: 0 auto var(--spacing-md);
+}
+
+.arabic-blessing {
+    margin-top: var(--spacing-sm);
+    color: #00a859;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* Celebration Overlay */
+.celebration-overlay {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+}
+
+.celebration-overlay.active {
+    animation: celebrationSlideIn 2s ease-out forwards;
+}
+
+@keyframes celebrationSlideIn {
+    0% { 
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    10% { 
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    85% { 
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% { 
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+.celebration-message {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid #ff7043;
+    border-radius: 20px;
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    box-shadow: 
+        0 12px 40px rgba(255, 112, 67, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    min-width: 400px;
+}
+
+.celebration-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00a859;
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: 0.5px;
+}
+
+.celebration-amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ff7043;
+    text-shadow: none;
+    letter-spacing: -0.5px;
+}
+
+/* Confetti Canvas */
+#confettiCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* ===================================
+   CONTROL PAGE STYLES
+   =================================== */
+.control-page {
+    background: linear-gradient(135deg, #0a0f0d 0%, #0f1512 100%);
+    min-height: 100vh;
+    padding: var(--spacing-xl);
+}
+
+.control-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Control Header */
+.control-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid rgba(26, 181, 181, 0.2);
+}
+
+.control-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.control-title h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--teal-300), var(--teal-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sync-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: rgba(26, 181, 181, 0.1);
+    border: 1px solid var(--teal-500);
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--teal-300);
+}
+
+.sync-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--coral-500);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.stat-card {
+    background: var(--surface);
+    border: 1px solid rgba(26, 181, 181, 0.2);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 181, 181, 0.15);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.stat-content {
+    flex-grow: 1;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--gray-400);
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--teal-300);
+}
+
+/* Control Sections */
+.control-section {
+    background: var(--surface);
+    border: 1px solid rgba(26, 181, 181, 0.15);
+    border-radius: 16px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.control-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray-100);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.section-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--teal-400);
+    stroke-width: 2;
+}
+
+/* Goal Input */
+.goal-input-group {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+}
+
+.input-wrapper {
+    flex-grow: 1;
+}
+
+.input-wrapper label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-300);
+    margin-bottom: var(--spacing-xs);
+}
+
+.input-wrapper input[type="number"] {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--surface-light);
+    border: 1px solid rgba(26, 181, 181, 0.3);
+    border-radius: 12px;
+    color: var(--gray-100);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-wrapper input[type="number"]:focus {
+    outline: none;
+    border-color: var(--teal-400);
+    box-shadow: 0 0 0 3px rgba(26, 181, 181, 0.1);
+}
+
+/* Buttons */
+.btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    white-space: nowrap;
+}
+
+.btn svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--coral-600), var(--coral-500));
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 112, 67, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 112, 67, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--surface-light);
+    color: var(--teal-300);
+    border: 1px solid var(--teal-500);
+}
+
+.btn-secondary:hover {
+    background: rgba(26, 181, 181, 0.1);
+    border-color: var(--teal-400);
+}
+
+.btn-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid #ef4444;
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+/* Quick Donate Grid */
+.quick-donate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.donate-btn {
+    padding: var(--spacing-lg);
+    background: var(--surface-light);
+    border: 2px solid rgba(26, 181, 181, 0.3);
+    border-radius: 12px;
+    color: var(--teal-300);
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.donate-btn:hover {
+    background: rgba(26, 181, 181, 0.15);
+    border-color: var(--teal-400);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 181, 181, 0.2);
+}
+
+.donate-btn:active {
+    transform: scale(0.95);
+}
+
+/* Custom Amount */
+.custom-amount-group {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.currency-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency-symbol {
+    position: absolute;
+    left: var(--spacing-md);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--teal-400);
+    pointer-events: none;
+}
+
+.currency-input input {
+    padding-left: 2.5rem !important;
+}
+
+/* Recent Donations */
+.recent-donations {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.recent-donations::-webkit-scrollbar {
+    width: 8px;
+}
+
+.recent-donations::-webkit-scrollbar-track {
+    background: var(--surface-light);
+    border-radius: 4px;
+}
+
+.recent-donations::-webkit-scrollbar-thumb {
+    background: var(--teal-600);
+    border-radius: 4px;
+}
+
+.donation-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    background: var(--surface-light);
+    border: 1px solid rgba(26, 181, 181, 0.1);
+    border-radius: 12px;
+    margin-bottom: var(--spacing-sm);
+    animation: slideIn 0.3s ease-out;
+    gap: var(--spacing-md);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.donation-info {
+    flex-grow: 1;
+}
+
+.donation-amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--teal-300);
+}
+
+.donation-time {
+    font-size: 0.875rem;
+    color: var(--gray-400);
+}
+
+.donation-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-shrink: 0;
+}
+
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    background: transparent;
+}
+
+.btn-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+}
+
+.btn-edit {
+    color: var(--teal-400);
+}
+
+.btn-edit:hover {
+    background: rgba(26, 181, 181, 0.15);
+    color: var(--teal-300);
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    color: #ef4444;
+}
+
+.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    transform: translateY(-1px);
+}
+
+.btn-icon:active {
+    transform: scale(0.95);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    color: var(--gray-500);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+/* Danger Zone */
+.danger-zone {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.danger-actions {
+    text-align: center;
+}
+
+.danger-warning {
+    margin-top: var(--spacing-md);
+    color: var(--gray-400);
+    font-size: 0.875rem;
+}
+
+/* Control Footer */
+.control-footer {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(26, 181, 181, 0.2);
+    text-align: center;
+    color: var(--gray-400);
+    font-size: 0.9rem;
+}
+
+.footer-blessing {
+    margin-top: var(--spacing-sm);
+    color: var(--gold);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 768px) {
+    .display-container {
+        padding: var(--spacing-lg);
+    }
+    
+    .fundraising-card {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+    
+    .main-heading {
+        font-size: 2rem;
+    }
+    
+    .amount-display {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .currency {
+        font-size: 2rem;
+        margin-right: 0;
+    }
+    
+    .amount {
+        font-size: 3.5rem;
+    }
+    
+    .progress-info {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        text-align: center;
+    }
+    
+    .control-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: flex-start;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .goal-input-group,
+    .custom-amount-group {
+        flex-direction: column;
+    }
+    
+    .quick-donate-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .control-page {
+        padding: var(--spacing-md);
+    }
+    
+    .control-section {
+        padding: var(--spacing-md);
+    }
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+.text-center { text-align: center; }
+.hidden { display: none; }
+.fade-in { animation: fadeIn 0.3s ease-in; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+

@@ -1,0 +1,18 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+  from = "/display"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/panel"
+  to = "/control.html"
+  status = 200
+

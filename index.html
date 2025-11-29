@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Fundraising Display</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="display-page">
+    <!-- Islamic Pattern Background -->
+    <div class="pattern-overlay"></div>
+    
+    <!-- Main Display -->
+    <div class="display-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="live-badge">
+                <div class="live-pulse"></div>
+                <svg class="crescent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>LIVE FUNDRAISING</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="main-heading">
+                <span class="arabic-accent">✦</span>
+                Make an Impact Today
+                <span class="arabic-accent">✦</span>
+            </h1>
+            
+            <p class="subheading">Watch the difference grow in real-time as every contribution brings us closer to our goal</p>
+            
+            <!-- Fundraising Display Card -->
+            <div class="fundraising-card">
+                <div class="card-glow"></div>
+                
+                <div class="total-raised-label">TOTAL RAISED</div>
+                
+                <div class="amount-display">
+                    <span class="currency">$</span>
+                    <span class="amount" id="displayAmount">0</span>
+                </div>
+                
+                <!-- Progress Section -->
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span class="progress-label">Progress</span>
+                        <span class="progress-percentage" id="progressPercentage">0.0%</span>
+                        <span class="progress-goal">of $<span id="displayGoal">100000</span></span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-shine"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Islamic Decorative Elements -->
+            <div class="islamic-pattern pattern-left"></div>
+            <div class="islamic-pattern pattern-right"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-message">
+            <div class="islamic-divider"></div>
+            <p>JazakAllah Khair for your support</p>
+            <p class="arabic-blessing">بارك الله فيكم • May Allah bless you</p>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Celebration Overlay -->
+    <div class="celebration-overlay" id="celebrationOverlay">
+        <div class="celebration-message">
+            <div class="celebration-text">JazakAllah Khair</div>
+            <div class="celebration-amount" id="celebrationAmount">+$100</div>
+        </div>
+    </div>
+
+    <script src="display.js"></script>
+</body>
+</html>
+

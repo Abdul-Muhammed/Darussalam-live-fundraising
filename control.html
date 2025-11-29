@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraising Control Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="control-page">
+    <div class="control-container">
+        <!-- Header -->
+        <div class="control-header">
+            <div class="control-title">
+                <svg class="crescent-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>Fundraising Control Panel</h1>
+            </div>
+            <div class="sync-status" id="syncStatus">
+                <div class="sync-indicator"></div>
+                <span>Live</span>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-content">
+                    <div class="stat-label">Total Raised</div>
+                    <div class="stat-value">$<span id="controlAmount">0</span></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <div class="stat-label">Goal Progress</div>
+                    <div class="stat-value"><span id="controlPercentage">0.0</span>%</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <div class="stat-label">Donations Count</div>
+                    <div class="stat-value" id="donationCount">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goal Setting -->
+        <div class="control-section">
+            <h2>Fundraising Goal</h2>
+            <div class="goal-input-group">
+                <div class="input-wrapper">
+                    <label>Set Goal Amount ($)</label>
+                    <input type="number" id="goalInput" min="1000" step="1000" value="100000" placeholder="100000">
+                </div>
+                <button class="btn btn-secondary" id="updateGoalBtn">Update Goal</button>
+            </div>
+        </div>
+
+        <!-- Quick Donate Section -->
+        <div class="control-section">
+            <h2>
+                <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Quick Donate
+            </h2>
+            <div class="quick-donate-grid">
+                <button class="donate-btn" data-amount="10">$10</button>
+                <button class="donate-btn" data-amount="25">$25</button>
+                <button class="donate-btn" data-amount="50">$50</button>
+                <button class="donate-btn" data-amount="100">$100</button>
+                <button class="donate-btn" data-amount="250">$250</button>
+                <button class="donate-btn" data-amount="500">$500</button>
+                <button class="donate-btn" data-amount="1000">$1,000</button>
+                <button class="donate-btn" data-amount="5000">$5,000</button>
+            </div>
+        </div>
+
+        <!-- Custom Amount Section -->
+        <div class="control-section">
+            <h2>
+                <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2v20M2 12h20" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Custom Amount
+            </h2>
+            <div class="custom-amount-group">
+                <div class="input-wrapper flex-grow">
+                    <div class="currency-input">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="customAmountInput" min="1" step="1" placeholder="Enter amount">
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="addDonationBtn">
+                    <span>Add Donation</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2v20M2 12h20" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Recent Donations -->
+        <div class="control-section">
+            <h2>Recent Donations</h2>
+            <div class="recent-donations" id="recentDonations">
+                <div class="empty-state">
+                    <div class="empty-icon">🎁</div>
+                    <p>No donations yet. Start adding donations to see them here!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reset Section -->
+        <div class="control-section danger-zone">
+            <h2>Danger Zone</h2>
+            <div class="danger-actions">
+                <button class="btn btn-danger" id="resetBtn">Reset All Data</button>
+                <p class="danger-warning">⚠️ This will clear all donations and reset the counter to $0</p>
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="control-footer">
+            <p>💡 <strong>Tip:</strong> Keep this page open in a separate tab. Changes appear instantly on the display page.</p>
+            <p class="footer-blessing">بارك الله فيكم • May Allah bless your efforts</p>
+        </div>
+    </div>
+
+    <script src="control.js"></script>
+</body>
+</html>
+
