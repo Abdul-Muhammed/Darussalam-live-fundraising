@@ -180,6 +180,15 @@ body {
     line-height: 1.2;
 }
 
+.second-heading {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: var(--gray-50);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
 .arabic-accent {
     color: var(--gold);
     font-size: 0.7em;
