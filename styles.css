@@ -3,16 +3,16 @@
    =================================== */
 :root {
     /* Islamic Color Palette */
-    --emerald-50: #ecfdf5;
-    --emerald-100: #d1fae5;
-    --emerald-200: #a7f3d0;
-    --emerald-300: #6ee7b7;
-    --emerald-400: #34d399;
-    --emerald-500: #10b981;
-    --emerald-600: #059669;
-    --emerald-700: #047857;
-    --emerald-800: #065f46;
-    --emerald-900: #064e3b;
+    --emerald-50: #ecf6fc;
+    --emerald-100: #d8ecf8;
+    --emerald-200: #b3daf1;
+    --emerald-300: #84c3e8;
+    --emerald-400: #58addf;
+    --emerald-500: #2f95d1;
+    --emerald-600: #227ab0;
+    --emerald-700: #1c638e;
+    --emerald-800: #184f70;
+    --emerald-900: #153f59;
     
     --amber-400: #fbbf24;
     --amber-500: #f59e0b;
@@ -22,25 +22,25 @@
     --gold-light: #f4e5a8;
     
     /* Neutrals */
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-800: #1f2937;
-    --gray-900: #111827;
+    --gray-50: #f5f8f9;
+    --gray-100: #eaf0f2;
+    --gray-200: #d7e0e4;
+    --gray-300: #b5c3c9;
+    --gray-400: #8ea1a8;
+    --gray-500: #6f858d;
+    --gray-600: #586d75;
+    --gray-700: #44575e;
+    --gray-800: #33454b;
+    --gray-900: #26353a;
     
     /* Semantic Colors */
     --primary: var(--emerald-500);
     --primary-light: var(--emerald-400);
     --primary-dark: var(--emerald-700);
     --accent: var(--amber-500);
-    --background: #0a0f0d;
-    --surface: #111817;
-    --surface-light: #1a2221;
+    --background: #0f1c2a;
+    --surface: #16283a;
+    --surface-light: #1d3248;
     
     /* Typography */
     --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -56,8 +56,8 @@
     --spacing-3xl: 4rem;
     
     /* Effects */
-    --glow-emerald: 0 0 40px rgba(16, 185, 129, 0.3);
-    --glow-emerald-strong: 0 0 60px rgba(16, 185, 129, 0.5);
+    --glow-emerald: 0 0 40px rgba(47, 149, 209, 0.28);
+    --glow-emerald-strong: 0 0 60px rgba(47, 149, 209, 0.42);
     --glow-amber: 0 0 30px rgba(245, 158, 11, 0.4);
     
     /* Transitions */
@@ -94,7 +94,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    background: radial-gradient(ellipse at top, #0f2820 0%, var(--background) 50%);
+    background: linear-gradient(180deg, #204c68 0%, var(--background) 45%);
 }
 
 .pattern-overlay {
@@ -104,8 +104,8 @@ body {
     width: 100%;
     height: 100%;
     background-image: 
-        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(16, 185, 129, 0.02) 35px, rgba(16, 185, 129, 0.02) 70px),
-        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(16, 185, 129, 0.02) 35px, rgba(16, 185, 129, 0.02) 70px);
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(47, 149, 209, 0.03) 35px, rgba(47, 149, 209, 0.03) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(47, 149, 209, 0.03) 35px, rgba(47, 149, 209, 0.03) 70px);
     pointer-events: none;
     z-index: 1;
 }
@@ -130,15 +130,15 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm) var(--spacing-lg);
-    background: rgba(16, 185, 129, 0.15);
+    background: rgba(47, 149, 209, 0.12);
     border: 1px solid var(--emerald-500);
     border-radius: 50px;
     font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: 1px;
     color: var(--emerald-300);
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-    animation: badgePulse 3s ease-in-out infinite;
+    box-shadow: none;
+    animation: none;
 }
 
 .live-pulse {
@@ -161,8 +161,8 @@ body {
 }
 
 @keyframes badgePulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
-    50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.4); }
+    0%, 100% { box-shadow: none; }
+    50% { box-shadow: none; }
 }
 
 /* Main Content */
@@ -211,8 +211,8 @@ body {
 /* Fundraising Card */
 .fundraising-card {
     position: relative;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.15) 100%);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, rgba(47, 149, 209, 0.14) 0%, rgba(34, 122, 176, 0.22) 100%);
+    border: 1px solid rgba(47, 149, 209, 0.32);
     border-radius: 32px;
     padding: var(--spacing-3xl) var(--spacing-2xl);
     margin: 0 auto;
@@ -240,7 +240,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(47, 149, 209, 0.16) 0%, transparent 72%);
     animation: glowRotate 10s linear infinite;
     pointer-events: none;
 }
@@ -268,8 +268,8 @@ body {
     line-height: 1;
     color: var(--emerald-300);
     text-shadow: 
-        0 0 30px rgba(16, 185, 129, 0.5),
-        0 0 60px rgba(16, 185, 129, 0.3);
+        0 0 18px rgba(47, 149, 209, 0.3),
+        0 0 34px rgba(47, 149, 209, 0.22);
 }
 
 .currency {
@@ -279,6 +279,7 @@ body {
 
 .amount {
     font-size: clamp(4rem, 12vw, 8rem);
+    text-shadow: 0 0 22px rgba(47, 149, 209, 0.6), 0 0 40px rgba(47, 149, 209, 0.35);
     transition: transform var(--transition-medium);
 }
 
@@ -325,7 +326,7 @@ body {
 
 .progress-bar-container {
     height: 12px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 100px;
     overflow: hidden;
     position: relative;
@@ -449,7 +450,7 @@ body {
 
 .celebration-message {
     text-align: center;
-    background: rgba(10, 15, 13, 0.95);
+    background: rgba(28, 37, 34, 0.92);
     border: 1px solid var(--gold);
     border-radius: 16px;
     padding: var(--spacing-lg) var(--spacing-2xl);
@@ -471,7 +472,7 @@ body {
 .celebration-amount {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #ffffff;
+    color: var(--gray-50);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     letter-spacing: -0.5px;
 }
@@ -491,7 +492,7 @@ body {
    CONTROL PAGE STYLES
    =================================== */
 .control-page {
-    background: linear-gradient(135deg, #0a0f0d 0%, #0f1512 100%);
+    background: linear-gradient(135deg, #10263a 0%, #14314a 100%);
     min-height: 100vh;
     padding: var(--spacing-xl);
 }
@@ -508,7 +509,7 @@ body {
     align-items: center;
     margin-bottom: var(--spacing-2xl);
     padding-bottom: var(--spacing-lg);
-    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    border-bottom: 1px solid rgba(47, 149, 209, 0.24);
 }
 
 .control-title {
@@ -531,7 +532,7 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm) var(--spacing-lg);
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(47, 149, 209, 0.12);
     border: 1px solid var(--emerald-500);
     border-radius: 50px;
     font-weight: 600;
@@ -556,7 +557,7 @@ body {
 
 .stat-card {
     background: var(--surface);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(47, 149, 209, 0.24);
     border-radius: 16px;
     padding: var(--spacing-lg);
     display: flex;
@@ -567,7 +568,7 @@ body {
 
 .stat-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 8px 24px rgba(47, 149, 209, 0.2);
 }
 
 .stat-icon {
@@ -594,7 +595,7 @@ body {
 /* Control Sections */
 .control-section {
     background: var(--surface);
-    border: 1px solid rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(47, 149, 209, 0.18);
     border-radius: 16px;
     padding: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
@@ -640,7 +641,7 @@ body {
     width: 100%;
     padding: var(--spacing-md);
     background: var(--surface-light);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(47, 149, 209, 0.32);
     border-radius: 12px;
     color: var(--gray-100);
     font-size: 1rem;
@@ -651,7 +652,7 @@ body {
 .input-wrapper input[type="number"]:focus {
     outline: none;
     border-color: var(--emerald-400);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 0 3px rgba(47, 149, 209, 0.15);
 }
 
 /* Buttons */
@@ -678,12 +679,12 @@ body {
 .btn-primary {
     background: linear-gradient(135deg, var(--emerald-600), var(--emerald-500));
     color: white;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 12px rgba(47, 149, 209, 0.34);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 6px 20px rgba(47, 149, 209, 0.42);
 }
 
 .btn-primary:active {
@@ -697,7 +698,7 @@ body {
 }
 
 .btn-secondary:hover {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(47, 149, 209, 0.12);
     border-color: var(--emerald-400);
 }
 
@@ -721,7 +722,7 @@ body {
 .donate-btn {
     padding: var(--spacing-lg);
     background: var(--surface-light);
-    border: 2px solid rgba(16, 185, 129, 0.3);
+    border: 2px solid rgba(47, 149, 209, 0.32);
     border-radius: 12px;
     color: var(--emerald-300);
     font-size: 1.25rem;
@@ -731,10 +732,10 @@ body {
 }
 
 .donate-btn:hover {
-    background: rgba(16, 185, 129, 0.15);
+    background: rgba(47, 149, 209, 0.16);
     border-color: var(--emerald-400);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 12px rgba(47, 149, 209, 0.26);
 }
 
 .donate-btn:active {
@@ -796,7 +797,7 @@ body {
     justify-content: space-between;
     padding: var(--spacing-md);
     background: var(--surface-light);
-    border: 1px solid rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(47, 149, 209, 0.14);
     border-radius: 12px;
     margin-bottom: var(--spacing-sm);
     animation: slideIn 0.3s ease-out;
@@ -860,7 +861,7 @@ body {
 }
 
 .btn-edit:hover {
-    background: rgba(16, 185, 129, 0.15);
+    background: rgba(47, 149, 209, 0.16);
     color: var(--emerald-300);
     transform: translateY(-1px);
 }
@@ -910,7 +911,7 @@ body {
 .control-footer {
     margin-top: var(--spacing-2xl);
     padding-top: var(--spacing-lg);
-    border-top: 1px solid rgba(16, 185, 129, 0.2);
+    border-top: 1px solid rgba(47, 149, 209, 0.24);
     text-align: center;
     color: var(--gray-400);
     font-size: 0.9rem;
