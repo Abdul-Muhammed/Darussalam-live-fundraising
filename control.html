@@ -94,6 +94,16 @@
                         <input type="number" id="customAmountInput" min="1" step="1" placeholder="Enter amount">
                     </div>
                 </div>
+                <div class="input-wrapper phone-wrapper">
+                    <label for="customPhoneInput">Phone Number (Optional)</label>
+                    <input
+                        type="tel"
+                        id="customPhoneInput"
+                        placeholder="e.g. +64 21 555 1234"
+                        inputmode="tel"
+                        autocomplete="tel"
+                    >
+                </div>
                 <button class="btn btn-primary" id="addDonationBtn">
                     <span>Add Donation</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -101,6 +111,7 @@
                     </svg>
                 </button>
             </div>
+            <p class="input-help-text">Phone number is optional and only used for pledge export records.</p>
         </div>
 
         <!-- Recent Donations -->
@@ -111,6 +122,20 @@
                     <div class="empty-icon">🎁</div>
                     <p>No donations yet. Start adding donations to see them here!</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Export Section -->
+        <div class="control-section">
+            <h2>Pledge Export</h2>
+            <div class="export-actions">
+                <button class="btn btn-secondary" id="exportCsvBtn">
+                    <span>Export Pledges (CSV)</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 3v13m0 0l5-5m-5 5l-5-5M4 21h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <p class="export-note">Downloads all stored pledges with amount, optional phone number, and timestamps.</p>
             </div>
         </div>
 

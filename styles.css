@@ -637,7 +637,8 @@ body {
     margin-bottom: var(--spacing-xs);
 }
 
-.input-wrapper input[type="number"] {
+.input-wrapper input[type="number"],
+.input-wrapper input[type="tel"] {
     width: 100%;
     padding: var(--spacing-md);
     background: var(--surface-light);
@@ -649,7 +650,8 @@ body {
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.input-wrapper input[type="number"]:focus {
+.input-wrapper input[type="number"]:focus,
+.input-wrapper input[type="tel"]:focus {
     outline: none;
     border-color: var(--emerald-400);
     box-shadow: 0 0 0 3px rgba(47, 149, 209, 0.15);
@@ -746,6 +748,7 @@ body {
 .custom-amount-group {
     display: flex;
     gap: var(--spacing-md);
+    align-items: flex-end;
 }
 
 .flex-grow {
@@ -769,6 +772,27 @@ body {
 
 .currency-input input {
     padding-left: 2.5rem !important;
+}
+
+.phone-wrapper {
+    min-width: 260px;
+}
+
+.input-help-text {
+    margin-top: var(--spacing-sm);
+    color: var(--gray-400);
+    font-size: 0.875rem;
+}
+
+.export-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.export-note {
+    color: var(--gray-400);
+    font-size: 0.875rem;
 }
 
 /* Recent Donations */
@@ -828,6 +852,12 @@ body {
 .donation-time {
     font-size: 0.875rem;
     color: var(--gray-400);
+}
+
+.donation-phone {
+    font-size: 0.875rem;
+    color: var(--gold-light);
+    margin-top: 2px;
 }
 
 .donation-actions {
@@ -971,6 +1001,10 @@ body {
     .goal-input-group,
     .custom-amount-group {
         flex-direction: column;
+    }
+
+    .phone-wrapper {
+        min-width: 100%;
     }
     
     .quick-donate-grid {

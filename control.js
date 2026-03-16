@@ -4,6 +4,8 @@
 
 class FundraisingControl {
     constructor() {
+        this.maxVisibleDonations = 50;
+
         this.data = {
             totalRaised: 0,
             goal: 100000,
@@ -20,10 +22,12 @@ class FundraisingControl {
             // Input elements
             goalInput: document.getElementById('goalInput'),
             customAmountInput: document.getElementById('customAmountInput'),
+            customPhoneInput: document.getElementById('customPhoneInput'),
             
             // Button elements
             updateGoalBtn: document.getElementById('updateGoalBtn'),
             addDonationBtn: document.getElementById('addDonationBtn'),
+            exportCsvBtn: document.getElementById('exportCsvBtn'),
             resetBtn: document.getElementById('resetBtn'),
             
             // List elements
@@ -48,7 +52,21 @@ class FundraisingControl {
         const stored = localStorage.getItem('fundraising_data');
         if (stored) {
             try {
-                this.data = JSON.parse(stored);
+                const parsed = JSON.parse(stored);
+                const storedDonations = Array.isArray(parsed.donations) ? parsed.donations : [];
+                const donationCount = Number.isInteger(parsed.donationCount)
+                    ? parsed.donationCount
+                    : storedDonations.length;
+
+                this.data = {
+                    totalRaised: Number(parsed.totalRaised) || 0,
+                    goal: Number(parsed.goal) || 100000,
+                    donations: storedDonations.map(donation => ({
+                        ...donation,
+                        phoneNumber: donation.phoneNumber ? this.sanitizePhone(donation.phoneNumber) : ''
+                    })),
+                    donationCount
+                };
                 this.elements.goalInput.value = this.data.goal;
             } catch (e) {
                 console.error('Error loading data:', e);
@@ -83,6 +101,10 @@ class FundraisingControl {
         this.elements.customAmountInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.addCustomDonation();
         });
+
+        this.elements.customPhoneInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.addCustomDonation();
+        });
         
         // Quick donate buttons
         document.querySelectorAll('.donate-btn').forEach(btn => {
@@ -90,6 +112,11 @@ class FundraisingControl {
                 const amount = parseFloat(btn.dataset.amount);
                 this.addDonation(amount);
             });
+        });
+
+        // Export pledges
+        this.elements.exportCsvBtn.addEventListener('click', () => {
+            this.exportPledgesToCsv();
         });
         
         // Reset button
@@ -115,17 +142,19 @@ class FundraisingControl {
     
     addCustomDonation() {
         const amount = parseFloat(this.elements.customAmountInput.value);
+        const phoneNumber = this.sanitizePhone(this.elements.customPhoneInput.value);
         
         if (!amount || amount <= 0) {
             alert('Please enter a valid donation amount');
             return;
         }
         
-        this.addDonation(amount);
+        this.addDonation(amount, { phoneNumber });
         this.elements.customAmountInput.value = '';
+        this.elements.customPhoneInput.value = '';
     }
     
-    addDonation(amount) {
+    addDonation(amount, options = {}) {
         // Add to total
         this.data.totalRaised += amount;
         this.data.donationCount += 1;
@@ -134,15 +163,11 @@ class FundraisingControl {
         const donation = {
             amount: amount,
             timestamp: new Date().toISOString(),
-            id: Date.now()
+            id: Date.now(),
+            phoneNumber: options.phoneNumber || ''
         };
         
         this.data.donations.unshift(donation);
-        
-        // Keep only last 50 donations
-        if (this.data.donations.length > 50) {
-            this.data.donations = this.data.donations.slice(0, 50);
-        }
         
         // Save and render
         this.saveData();
@@ -200,6 +225,13 @@ class FundraisingControl {
         
         // Update donation
         donation.amount = parsedAmount;
+        const phonePrompt = prompt(
+            'Edit phone number (optional):',
+            donation.phoneNumber || ''
+        );
+        if (phonePrompt !== null) {
+            donation.phoneNumber = this.sanitizePhone(phonePrompt);
+        }
         donation.edited = true;
         donation.editedAt = new Date().toISOString();
         
@@ -247,8 +279,9 @@ class FundraisingControl {
     
     renderDonations() {
         const container = this.elements.recentDonations;
+        const visibleDonations = this.data.donations.slice(0, this.maxVisibleDonations);
         
-        if (this.data.donations.length === 0) {
+        if (visibleDonations.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-icon">🎁</div>
@@ -258,12 +291,16 @@ class FundraisingControl {
             return;
         }
         
-        container.innerHTML = this.data.donations.map(donation => {
+        container.innerHTML = visibleDonations.map(donation => {
             const time = this.formatTime(donation.timestamp);
+            const phoneLine = donation.phoneNumber
+                ? `<div class="donation-phone">${this.escapeHtml(donation.phoneNumber)}</div>`
+                : '';
             return `
                 <div class="donation-item">
                     <div class="donation-info">
                         <div class="donation-amount">$${this.formatNumber(donation.amount)}</div>
+                        ${phoneLine}
                         <div class="donation-time">${time}</div>
                     </div>
                     <div class="donation-actions">
@@ -301,6 +338,75 @@ class FundraisingControl {
     
     formatNumber(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    sanitizePhone(phoneInput) {
+        if (!phoneInput) return '';
+        return phoneInput.replace(/[^\d+\-\s()]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    escapeHtml(value) {
+        if (value === null || value === undefined) return '';
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    escapeCsvValue(value) {
+        if (value === null || value === undefined) return '""';
+        const safeValue = String(value).replace(/"/g, '""');
+        return `"${safeValue}"`;
+    }
+
+    exportPledgesToCsv() {
+        if (!Array.isArray(this.data.donations) || this.data.donations.length === 0) {
+            this.showNotification('No pledges available to export yet.', 'error');
+            return;
+        }
+
+        const headers = [
+            'Donation ID',
+            'Amount',
+            'Phone Number',
+            'Created At',
+            'Edited',
+            'Edited At'
+        ];
+
+        const rows = [...this.data.donations]
+            .reverse()
+            .map(donation => [
+                donation.id || '',
+                Number(donation.amount || 0).toFixed(2),
+                donation.phoneNumber || '',
+                donation.timestamp || '',
+                donation.edited ? 'Yes' : 'No',
+                donation.editedAt || ''
+            ]);
+
+        const csvContent = [
+            headers.map(value => this.escapeCsvValue(value)).join(','),
+            ...rows.map(row => row.map(value => this.escapeCsvValue(value)).join(','))
+        ].join('\r\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+
+        const now = new Date();
+        const stamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `pledges-${stamp}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        this.showNotification('Pledge export downloaded successfully.', 'success');
     }
     
     formatTime(timestamp) {
@@ -340,18 +446,23 @@ class FundraisingControl {
         }, 150);
     }
     
-    showNotification(message) {
+    showNotification(message, type = 'success') {
+        const isError = type === 'error';
         // Simple notification (could be enhanced with a toast library)
         const notification = document.createElement('div');
         notification.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
+            background: ${isError
+                ? 'linear-gradient(135deg, #b91c1c, #ef4444)'
+                : 'linear-gradient(135deg, var(--emerald-700), var(--emerald-500))'};
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(26, 181, 181, 0.3);
+            box-shadow: ${isError
+                ? '0 4px 12px rgba(239, 68, 68, 0.35)'
+                : '0 4px 12px rgba(47, 149, 209, 0.34)'};
             z-index: 10000;
             animation: slideInRight 0.3s ease-out;
             font-weight: 600;
